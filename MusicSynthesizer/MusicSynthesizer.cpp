@@ -4,14 +4,14 @@
 
 #define MAX_LOADSTRING 100
 
-// Глобальные переменные:
-HINSTANCE hInst;                                // текущий экземпляр
-WCHAR szTitle[MAX_LOADSTRING];                  // Текст строки заголовка
-WCHAR szWindowClass[MAX_LOADSTRING];            // имя класса главного окна
+// Глобальні змінні:
+HINSTANCE hInst;                                // поточний екземпляр
+WCHAR szTitle[MAX_LOADSTRING];                  // Текст рядка заголовка
+WCHAR szWindowClass[MAX_LOADSTRING];            // ім'я класу головного вікна
 HWND hPiano;
 HANDLE hDevice;
 
-// Отправить объявления функций, включенных в этот модуль кода:
+// Надіслати оголошення функцій, включених до цього модуль коду:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -26,12 +26,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
 
-    // Инициализация глобальных строк
+    // Ініціалізація глобальних рядків:
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_MUSICSYNTHESIZER, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
-    // Выполнить инициализацию приложения:
+    // Виконати ініціалізацію програми:
     if (!InitInstance(hInstance, nCmdShow))
     {
         return FALSE;
@@ -41,7 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // Цикл основного сообщения:
+    // Цикл основного повідомлення:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
@@ -57,9 +57,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 //
-//  ФУНКЦИЯ: MyRegisterClass()
+//  ФУНКЦІЯ: MyRegisterClass()
 //
-//  ЦЕЛЬ: Регистрирует класс окна.
+//  ЦІЛЬ: Реєструє клас вікна.
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
@@ -83,18 +83,18 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 }
 
 //
-//   ФУНКЦИЯ: InitInstance(HINSTANCE, int)
+//   ФУНКЦІЯ: InitInstance(HINSTANCE, int)
 //
-//   ЦЕЛЬ: Сохраняет маркер экземпляра и создает главное окно
+//   ЦІЛЬ: Зберігає маркер екземпляра та створює головне вікно
 //
-//   КОММЕНТАРИИ:
+//   КОМЕНТАРІ:
 //
-//        В этой функции маркер экземпляра сохраняется в глобальной переменной, а также
-//        создается и выводится главное окно программы.
+//        У цій функції маркер екземпляра зберігається в глобальній змінній, а також
+//        створюється та виводиться головне вікно програми.
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-    hInst = hInstance; // Сохранить маркер экземпляра в глобальной переменной
+    hInst = hInstance; // Зберегти маркер екземпляра у глобальній змінній
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
         550, 330, 735, 600, nullptr, nullptr, hInstance, nullptr);
@@ -111,34 +111,34 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
 //
-//  ФУНКЦИЯ: WndProc(HWND, UINT, WPARAM, LPARAM)
+//  ФУНКЦІЯ: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-//  ЦЕЛЬ: Обрабатывает сообщения в главном окне.
+//  ЦІЛЬ: Обробляє повідомлення у головному вікні.
 //
-//  WM_COMMAND  - обработать меню приложения
-//  WM_PAINT    - Отрисовка главного окна
-//  WM_DESTROY  - отправить сообщение о выходе и вернуться
+//  WM_COMMAND  - обробити меню програми
+//  WM_PAINT    - Відображення головного вікна
+//  WM_DESTROY  - надіслати повідомлення про вихід та повернутися
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    // Groupboxes
+    // Групбокси
     static HWND hGroupBoxOptions;
     static HWND hGroupBoxPatchesAndIntruments;
     static HWND hGroupBoxParameters;
 
-    // Drop-down lists
+    // Випадаючі списки
     static HWND hDropDownListDevices;
     static HWND hDropDownListPatches;
 
-    // Checkboxes
+    // Чекбокси
     static HWND hCheckboxShowNotes;
     static HWND hCheckboxShowKeys;
 
-    // Listboxes
+    // Листбокси
     static HWND hListboxInstruments;
 
-    // Static text windows
+    // Вікна статичного тексту
     static HWND hStaticOctave;
     static HWND hStaticCurrentOctave;
     static HWND hStaticVolume;
@@ -146,13 +146,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     static HWND hStaticVibrato;
     static HWND hStaticPitch;
 
-    // Trackbars
+    // Трекбари
     static HWND hTrackbarVolume;
     static HWND hTrackbarBalance;
     static HWND hTrackbarVibrato;
     static HWND hTrackbarPitch;
 
-    // Buttons
+    // Кнопки
     static HWND hButtonConnectToDriver;
     static HWND hButtonDisconnectDriver;
 
@@ -334,7 +334,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         if (c >= 0 && !pk[c].dn) {
             pk[c].dn = true;
-            //InvalidateRect(hWnd, &pk[c].rc, FALSE);
             g_kbd.note = g_kbd.octave * 12 + pk[c].nt;
             PlayNote(g_kbd.hMidi, g_kbd.chPlay, g_kbd.note, g_kbd.volume);
             break;
@@ -374,7 +373,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         if (c >= 0 && pk[c].dn) {
             pk[c].dn = false;
-            // StopNote(g_kbd.);
         }
     }
     break;
@@ -477,7 +475,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
 
         int wmId = LOWORD(wParam);
-        // Разобрать выбор в меню:
+        // Розібрати вибір у меню:
         switch (wmId)
         {
         case IDM_ABOUT:
@@ -671,7 +669,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-// Обработчик сообщений для окна "О программе".
+// Обробник повідомлень для вікна "Про програму".
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(lParam);

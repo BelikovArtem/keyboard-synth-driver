@@ -1,8 +1,8 @@
 ﻿  MusicSynthesizer.cpp
-D:\Projects\C++\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.h(321,11): warning C4101: szText: неиспользованная локальная переменная
-D:\Projects\C++\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.cpp(435,24): warning C4244: инициализация: преобразование "LRESULT" в "long", возможна потеря данных
-D:\Projects\C++\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.cpp(511,33): warning C4244: =: преобразование "float" в "long", возможна потеря данных
-D:\Projects\C++\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.cpp(564,29): warning C4267: =: преобразование из "size_t" в "long"; возможна потеря данных
-D:\Projects\C++\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.cpp(576,48): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-D:\Projects\C++\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.h(404): warning C4715: GetNoteText: значение возвращается не при всех путях выполнения
-  MusicSynthesizer.vcxproj -> D:\Projects\C++\keyboard-synth-driver\MusicSynthesizer\x64\Debug\MusicSynthesizer.exe
+D:\Projects\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.h(321,11): warning C4101: szText: неиспользованная локальная переменная
+D:\Projects\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.cpp(433,24): warning C4244: инициализация: преобразование "LRESULT" в "long", возможна потеря данных
+D:\Projects\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.cpp(509,33): warning C4244: =: преобразование "float" в "long", возможна потеря данных
+D:\Projects\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.cpp(562,29): warning C4267: =: преобразование из "size_t" в "long"; возможна потеря данных
+D:\Projects\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.cpp(574,48): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\keyboard-synth-driver\MusicSynthesizer\MusicSynthesizer.h(404): warning C4715: GetNoteText: значение возвращается не при всех путях выполнения
+  MusicSynthesizer.vcxproj -> D:\Projects\keyboard-synth-driver\MusicSynthesizer\x64\Debug\MusicSynthesizer.exe

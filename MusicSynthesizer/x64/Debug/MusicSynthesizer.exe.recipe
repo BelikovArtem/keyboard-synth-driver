@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\Projects\C++\keyboard-synth-driver\MusicSynthesizer\x64\Debug\MusicSynthesizer.exe</FullPath>
+      <FullPath>D:\Projects\keyboard-synth-driver\MusicSynthesizer\x64\Debug\MusicSynthesizer.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
