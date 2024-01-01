@@ -1,9 +1,11 @@
 #include <ntddk.h>
 
+// Структура даних, пов'язана з об'єктом пристрою
 typedef struct {
     PDEVICE_OBJECT LowerKbdDevice;
 } DEVICE_EXTENSION, * PDEVICE_EXTENSION;
 
+// Структура даних, яка відображає введену інформацію з клавіатури
 typedef struct _KEYBOARD_INPUT_DATA {
     USHORT UnitId;
     USHORT MakeCode;
@@ -12,10 +14,13 @@ typedef struct _KEYBOARD_INPUT_DATA {
     USHORT ExtraInformation;
 } KEYBOARD_INPUT_DATA, * PKEYBOARD_INPUT_DATA;
 
+// Об'єкт пристрою
 PDEVICE_OBJECT myKbdDevice;
 
+// Кількість необроблених клавіш
 ULONG pendingKey = 0;
 
+// Процедура вивантаження драйвера
 VOID DriverUnload(PDRIVER_OBJECT DriverObject) {
     LARGE_INTEGER interval = { 0 };
 
@@ -33,6 +38,7 @@ VOID DriverUnload(PDRIVER_OBJECT DriverObject) {
     KdPrint(("Driver unload called successfully"));
 }
 
+ // Процедура завершення обробки IRP-пакета IRP_MJ_READ
 NTSTATUS ReadComplete(PDEVICE_OBJECT DeviceObject, PIRP Irp, PVOID Context) {
     UNREFERENCED_PARAMETER(Context);
     UNREFERENCED_PARAMETER(DeviceObject);
@@ -54,6 +60,7 @@ NTSTATUS ReadComplete(PDEVICE_OBJECT DeviceObject, PIRP Irp, PVOID Context) {
     return Irp->IoStatus.Status;
 }
 
+// Процедура обробки пакетів IRP_MJ_READ
 NTSTATUS DispatchRead(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     IoCopyCurrentIrpStackLocationToNext(Irp);
 
@@ -64,11 +71,13 @@ NTSTATUS DispatchRead(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     return IoCallDriver(((PDEVICE_EXTENSION)DeviceObject->DeviceExtension)->LowerKbdDevice, Irp);
 }
 
+// Процедура обробки всіх пакетів IRP, окрім IRP_MJ_READ, IRP_MJ_CREATE, IRP_MJ_CLOSE
 NTSTATUS DispatchPass(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     IoCopyCurrentIrpStackLocationToNext(Irp);
     return IoCallDriver(((PDEVICE_EXTENSION)DeviceObject->DeviceExtension)->LowerKbdDevice, Irp);
 }
 
+// Ініціалізація пристрою
 NTSTATUS MyAttachDevice(PDRIVER_OBJECT DriverObject) {
     NTSTATUS status;
     UNICODE_STRING higherDevice = RTL_CONSTANT_STRING(L"\\Device\\HigherKeyboardClass0");
@@ -93,6 +102,7 @@ NTSTATUS MyAttachDevice(PDRIVER_OBJECT DriverObject) {
     return STATUS_SUCCESS;
 }
 
+// Процедура обробки пакетів IRP_MJ_CREATE
 NTSTATUS OnCreate(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     UNREFERENCED_PARAMETER(DeviceObject);
     Irp->IoStatus.Status = STATUS_SUCCESS;
@@ -102,6 +112,7 @@ NTSTATUS OnCreate(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     return STATUS_SUCCESS;
 }
 
+// Процедура обробки пакетів IRP_MJ_CLOSE
 NTSTATUS OnClose(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     UNREFERENCED_PARAMETER(DeviceObject);
     Irp->IoStatus.Status = STATUS_SUCCESS;
@@ -111,6 +122,7 @@ NTSTATUS OnClose(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
     return STATUS_SUCCESS;
 }
 
+// Вхідна точка у драйвер
 NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) {
     UNREFERENCED_PARAMETER(RegistryPath);
 

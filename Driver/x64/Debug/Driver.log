@@ -1,8 +1,8 @@
 ﻿  Building 'Driver' with toolset 'WindowsKernelModeDriver10.0' and the 'Desktop' target platform.
   Driver.c
-  Driver.vcxproj -> D:\Projects\C++\keyboard-synth-driver\Driver\x64\Debug\Driver.sys
+  Driver.vcxproj -> D:\Projects\keyboard-synth-driver\Driver\x64\Debug\Driver.sys
   Done Adding Additional Store
-  Successfully signed: D:\Projects\C++\keyboard-synth-driver\Driver\x64\Debug\Driver.sys
+  Successfully signed: D:\Projects\keyboard-synth-driver\Driver\x64\Debug\Driver.sys
   
   Inf2Cat task was skipped as there were no inf files to process
   
